@@ -19,7 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'index'
+    'index',
+    'maps'
 ]
 
 MIDDLEWARE = [
@@ -96,3 +97,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/igityopp/gis.feyton.co.rw/static'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+MAP_DIR = os.path.join(BASE_DIR, 'maps')

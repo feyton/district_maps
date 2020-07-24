@@ -1,0 +1,113 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GIS | {% block title %}{% endblock title %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/css/fontawesome-all.css">
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/index.css" class="css">
+
+    {% block extra_head %}
+
+    {% endblock extra_head %}
+
+    <!--===============================================================================================-->
+</head>
+
+<body>
+
+    <head>
+        <nav class="navbar navbar-expand-lg bg-info">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+                    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}"><img src="/static/images/favicon.png" alt=""
+                        height="30px"></a>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+                    <form class="form-inline m-auto" action="" method="get">
+                        <div class="form-group no-border">
+                            <input type="text" class="form-control" placeholder="Search code">
+                        </div>
+                        <button type="submit" class="btn btn-neutral btn-icon btn-round">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                    <ul class="navbar-nav ">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'single-map' %}">Single-Map</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'multiple-maps' %}">Multiple-Maps</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </head>
+    {% block content %}
+
+    {% endblock content %}
+    {% include 'include/footer.html' %}
+
+    <!--===============================================================================================-->
+    <script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/bootstrap/js/popper.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/select2/select2.min.js"></script>
+    <script src="/static/js/now-ui-dashboard.js"></script>
+    <script src="/static/js/bootstrap-notify.js"></script>
+    <script>
+        {% if messages %}
+        {% for message in messages %}
+        $.notify({
+            title: "<b>Message</b><br>",
+            message: '<strong>{{ message }}</strong>'
+        },
+            {{% if message.tags %}
+        type: "{{ message.tags }}",
+            {% else %}
+        type: 'danger',
+            {% endif %}
+        delay: 5000,
+                   
+           })
+        {% endfor %}
+
+
+        {% endif %}
+    </script>
+
+    {% block extra_java %}
+
+    {% endblock extra_java %}
+
+
+
+</body>
+
+</html>

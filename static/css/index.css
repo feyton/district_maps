@@ -1,0 +1,735 @@
+.card.card-carousel {
+    overflow: hidden;
+    height: 300px;
+}
+
+.card.card-carousel img {
+    height: 180px;
+}
+
+.card.card-carousel p {
+    padding-left: 13px;
+    padding-right: 13px;
+}
+
+.card.card-carousel .testimonial-author {
+    height: 40px;
+    font-weight: bold;
+}
+
+.card.card-carousel .testimonial-text {
+
+    height: 50px;
+    overflow: hidden;
+}
+
+.p-large {
+    font: 400 1rem/1.5rem "Raleway", sans-serif;
+}
+
+.p-small {
+    font: 400 0.75rem/1.25rem "Raleway", sans-serif;
+}
+
+.p-heading {
+    margin-bottom: 3.875rem;
+}
+
+.li-space-lg li {
+    margin-bottom: 0.25rem;
+}
+
+.indent {
+    padding-left: 1.25rem;
+}
+
+a.turquoise {
+    color: #00bfd8;
+}
+
+a.white {
+    color: #fff;
+}
+
+.testimonial-text {
+    font: italic 400 1rem/1.5rem "Raleway", sans-serif;
+}
+
+.testimonial-author {
+    font: 700 1rem/1.5rem "Raleway", sans-serif;
+}
+
+.turquoise {
+    color: #00bfd8;
+}
+
+.btn-solid-reg {
+    display: inline-block;
+    padding: 1.1875rem 2.125rem 1.1875rem 2.125rem;
+    border: 0.125rem solid #00bfd8;
+    border-radius: 2rem;
+    background-color: #00bfd8;
+    color: #fff;
+    font: 700 0.75rem/0 "Raleway", sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-solid-reg:hover {
+    background-color: transparent;
+    color: #00bfd8;
+    text-decoration: none;
+}
+
+.btn-solid-lg {
+    display: inline-block;
+    padding: 1.375rem 2.625rem 1.375rem 2.625rem;
+    border: 0.125rem solid #00bfd8;
+    border-radius: 2rem;
+    background-color: #00bfd8;
+    color: #fff;
+    font: 700 0.75rem/0 "Raleway", sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-solid-lg:hover {
+    background-color: transparent;
+    color: #00bfd8;
+    text-decoration: none;
+}
+
+.btn-outline-reg {
+    display: inline-block;
+    padding: 1.1875rem 2.125rem 1.1875rem 2.125rem;
+    border: 0.125rem solid #00bfd8;
+    border-radius: 2rem;
+    background-color: transparent;
+    color: #00bfd8;
+    font: 700 0.75rem/0 "Raleway", sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-outline-reg:hover {
+    background-color: #00bfd8;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-outline-lg {
+    display: inline-block;
+    padding: 1.375rem 2.625rem 1.375rem 2.625rem;
+    border: 0.125rem solid #00bfd8;
+    border-radius: 2rem;
+    background-color: transparent;
+    color: #00bfd8;
+    font: 700 0.75rem/0 "Raleway", sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-outline-lg:hover {
+    background-color: #00bfd8;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-outline-sm {
+    display: inline-block;
+    padding: 1rem 1.625rem 0.875rem 1.625rem;
+    border: 0.125rem solid #00bfd8;
+    border-radius: 2rem;
+    background-color: transparent;
+    color: #00bfd8;
+    font: 700 0.625rem/0 "Raleway", sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-outline-sm:hover {
+    background-color: #00bfd8;
+    color: #fff;
+    text-decoration: none;
+}
+
+/*********************/
+/*    04. Header     */
+/*********************/
+.header {
+    background-color: #fff;
+}
+
+.header .header-content {
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+    text-align: center;
+}
+
+.header .text-container {
+    margin-bottom: 4rem;
+}
+
+.header h1 {
+    margin-bottom: 1.125rem;
+    font-size: 2.5rem;
+    line-height: 3.125rem;
+}
+
+.header .p-large {
+    margin-bottom: 1.875rem;
+}
+
+
+/*************************/
+/*     05. Customers     */
+/*************************/
+.slider-1 {
+    padding-top: 2.25rem;
+    padding-bottom: 2.125rem;
+    text-align: center;
+}
+
+.slider-1 h5 {
+    margin-bottom: 0.75rem;
+}
+
+.slider-1 .slider-container {
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
+    border-radius: 0.5rem;
+    background-color: #f7fcfd;
+}
+
+
+/************************/
+/*     06. Services     */
+/************************/
+.cards-1 {
+    padding-top: 4rem;
+    padding-bottom: 1.625rem;
+    text-align: center;
+}
+
+.cards-1 h2 {
+    margin-bottom: 1rem;
+}
+
+.cards-1 .card {
+    max-width: 21rem;
+    margin-right: auto;
+    margin-bottom: 4.5rem;
+    margin-left: auto;
+    padding: 3.25rem 2rem 2rem 2rem;
+    border: 1px solid #c4d8dc;
+    border-radius: 0.5rem;
+    background: transparent;
+}
+
+.cards-1 .card-image {
+    width: 6rem;
+    height: 6rem;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    margin-left: auto;
+}
+
+.cards-1 .card-title {
+    margin-bottom: 0.875rem;
+}
+
+.cards-1 .card-body {
+    padding: 0;
+}
+
+.n-decoration {
+    text-decoration: none;
+}
+
+.n-hover:hover {
+    text-decoration: none;
+}
+
+.button-group {
+
+    margin-bottom: 2px;
+    padding-bottom: 10px;
+}
+
+/*************************/
+/*     07. Details 1     */
+/*************************/
+.basic-1 {
+    padding-top: 1.625rem;
+    padding-bottom: 3.75rem;
+}
+
+.basic-1 .text-container {
+    margin-bottom: 4rem;
+}
+
+.basic-1 h2 {
+    margin-bottom: 1.375rem;
+}
+
+.basic-1 .btn-solid-reg {
+    margin-top: 0.625rem;
+}
+
+
+/*************************/
+/*     08. Details 2     */
+/*************************/
+.basic-2 {
+    padding-top: 3.75rem;
+    padding-bottom: 4rem;
+}
+
+.basic-2 .image-container {
+    margin-bottom: 4rem;
+}
+
+.basic-2 h2 {
+    margin-bottom: 1.375rem;
+}
+
+.basic-2 .list-unstyled .fas {
+    color: #00bfd8;
+    line-height: 1.375rem;
+}
+
+.list-unstyled .fas {
+    color: #00bfd8;
+    line-height: 1.375rem;
+}
+
+.basic-2 .list-unstyled .media-body {
+    margin-left: 0.625rem;
+}
+
+.list-unstyled .media-body {
+    margin-left: 0.625rem;
+}
+
+.basic-2 .btn-solid-reg {
+    margin-top: 0.625rem;
+}
+
+.cards-2 {
+    padding-top: 3rem;
+    padding-bottom: 2.75rem;
+    text-align: center;
+}
+
+.cards-2 h2 {
+    margin-bottom: 1rem;
+}
+
+.cards-2 .card {
+    display: block;
+    max-width: 19.5rem;
+    margin-right: auto;
+    margin-bottom: 6rem;
+    margin-left: auto;
+    border: 1px solid #c4d8dc;
+    border-radius: 0.5rem;
+}
+
+.cards-2 .card .card-body {
+    padding: 2.5rem 2.75rem 1.875rem 2.5rem;
+}
+
+.cards-2 .card .card-title {
+    margin-bottom: 0.625rem;
+    color: #393939;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    text-align: center;
+}
+
+.cards-2 .card .card-subtitle {
+    margin-bottom: 1.75rem;
+}
+
+.cards-2 .card .cell-divide-hr {
+    height: 1px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border: none;
+    background-color: #c4d8dc;
+}
+
+.cards-2 .card .price {
+    padding-top: 0.875rem;
+    padding-bottom: 1.5rem;
+}
+
+.cards-2 .card .value {
+    color: #00bfd8;
+    font-weight: 700;
+    font-size: 3.5rem;
+    line-height: 4rem;
+    text-align: center;
+}
+
+.cards-2 .card .currency {
+    margin-right: 0.375rem;
+    color: #00bfd8;
+    font-size: 1.5rem;
+    vertical-align: 56%;
+}
+
+.cards-2 .card .frequency {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.cards-2 .card .list-unstyled {
+    margin-top: 1.875rem;
+    margin-bottom: 1.625rem;
+    text-align: left;
+}
+
+.cards-2 .card .list-unstyled.li-space-lg li {
+    margin-bottom: 0.5rem;
+}
+
+.cards-2 .card .list-unstyled .fas {
+    color: #00bfd8;
+    line-height: 1.375rem;
+}
+
+.cards-2 .card .list-unstyled .fas.fa-times {
+    margin-left: 0.1875rem;
+    margin-right: 0.125rem;
+    color: #777b7e;
+}
+
+.cards-2 .card .list-unstyled .media-body {
+    margin-left: 0.625rem;
+}
+
+.cards-2 .card .button-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: -1.25rem;
+    left: 0;
+    text-align: center;
+}
+
+.cards-2 .card .btn-solid-reg:hover {
+    background-color: #fff;
+}
+
+/* Best Value Label */
+.cards-2 .card .label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10.625rem;
+    height: 10.625rem;
+    overflow: hidden;
+}
+
+.cards-2 .card .label .best-value {
+    position: relative;
+    width: 13.75rem;
+    padding: 0.3125rem 0 0.3125rem 4.125rem;
+    background-color: #00bfd8;
+    color: #fff;
+    -webkit-transform: rotate(45deg) translate3d(0, 0, 0);
+    -ms-transform: rotate(45deg) translate3d(0, 0, 0);
+    transform: rotate(45deg) translate3d(0, 0, 0);
+}
+
+/****************************/
+/*     13. Testimonials     */
+/****************************/
+.slider-2 {
+    padding-top: 7.5rem;
+    padding-bottom: 7rem;
+    background: url('../images/testimonials-background.jpg') center center no-repeat;
+    background-size: cover;
+}
+
+.slider-2 .image-container {
+    margin-bottom: 4rem;
+}
+
+.slider-2 h2 {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.slider-2 .slider-container {
+    position: relative;
+}
+
+.slider-2 .swiper-container {
+    position: static;
+    width: 90%;
+    text-align: center;
+}
+
+.slider-2 .swiper-button-prev:focus,
+.slider-2 .swiper-button-next:focus {
+    /* even if you can't see it chrome you can see it on mobile device */
+    outline: none;
+}
+
+.slider-2 .swiper-button-prev {
+    left: -0.5rem;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23626262'%2F%3E%3C%2Fsvg%3E");
+    background-size: 1.125rem 1.75rem;
+}
+
+.slider-2 .swiper-button-next {
+    right: -0.5rem;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23626262'%2F%3E%3C%2Fsvg%3E");
+    background-size: 1.125rem 1.75rem;
+}
+
+.slider-2 .card {
+    position: relative;
+    border: none;
+    background-color: transparent;
+}
+
+.slider-2 .card-image {
+    width: 7rem;
+    height: 7rem;
+    margin-right: auto;
+    margin-bottom: 0.25rem;
+    margin-left: auto;
+    border-radius: 50%;
+}
+
+.slider-2 .card-body {
+    padding-bottom: 0;
+}
+
+.slider-2 .testimonial-author {
+    margin-bottom: 0;
+}
+
+
+/*********************/
+/*     14. About     */
+/*********************/
+.basic-4 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+.basic-4 h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.basic-4 .team-member {
+    max-width: 12.5rem;
+    margin-right: auto;
+    margin-bottom: 3.5rem;
+    margin-left: auto;
+}
+
+/* Hover Animation */
+.basic-4 .image-wrapper {
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border-radius: 50%;
+}
+
+.basic-4 .image-wrapper img {
+    margin: 0;
+    transition: all 0.3s;
+}
+
+.basic-4 .image-wrapper:hover img {
+    -moz-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+}
+
+/* end of hover animation */
+
+.basic-4 .team-member .p-large {
+    margin-bottom: 0.25rem;
+    font-size: 1.125rem;
+}
+
+.basic-4 .team-member .job-title {
+    margin-bottom: 0.375rem;
+}
+
+.basic-4 .fa-stack {
+    margin-top: 0.375rem;
+    margin-right: 0.125rem;
+    margin-left: 0.125rem;
+    font-size: 0.875rem;
+}
+
+.basic-4 .fa-stack-2x {
+    color: #00bfd8;
+    transition: all 0.2s ease;
+}
+
+.basic-4 .fa-stack-1x {
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+.basic-4 .fa-stack:hover .fa-stack-2x {
+    color: #00a7bd;
+}
+
+.basic-4 .fa-stack:hover .fa-stack-1x {
+    color: #fff;
+}
+
+
+/***********************/
+/*     15. Contact     */
+/***********************/
+.form-2 {
+    padding-top: 7rem;
+    padding-bottom: 6.25rem;
+    background: url('../images/contact-background.jpg') center center no-repeat;
+    background-size: cover;
+}
+
+.form-2 h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.form-2 .list-unstyled {
+    margin-bottom: 3.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: center;
+}
+
+.form-2 .list-unstyled .fas,
+.form-2 .list-unstyled .fab {
+    margin-right: 0.5rem;
+    font-size: 0.875rem;
+    color: #00bfd8;
+}
+
+.form-2 .list-unstyled .fa-phone {
+    vertical-align: 3%;
+}
+
+.form-2 .map-responsive {
+    position: relative;
+    overflow: hidden;
+    height: 0;
+    margin-bottom: 4rem;
+    padding-bottom: 70%;
+    border-radius: 0.25rem;
+}
+
+.form-2 .map-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/**********************/
+/*     16. Footer     */
+/**********************/
+.footer {
+    padding-top: 4.625rem;
+    padding-bottom: 0.5rem;
+}
+
+.footer .footer-col {
+    margin-bottom: 2.25rem;
+}
+
+.footer h4 {
+    margin-bottom: 1rem;
+}
+
+.footer .list-unstyled .fas {
+    color: #00bfd8;
+    font-size: 0.5rem;
+    line-height: 1.375rem;
+}
+
+.footer .list-unstyled .media-body {
+    margin-left: 0.625rem;
+}
+
+.footer .fa-stack {
+    margin-bottom: 0.75rem;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.footer .fa-stack .fa-stack-1x {
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+.footer .fa-stack .fa-stack-2x {
+    color: #00bfd8;
+    transition: all 0.2s ease;
+}
+
+.footer .fa-stack:hover .fa-stack-1x {
+    color: #fff;
+}
+
+.footer .fa-stack:hover .fa-stack-2x {
+    color: #00a7bd;
+}
+
+
+/*************************/
+/*     17. Copyright     */
+/*************************/
+.copyright {
+    padding-top: 1rem;
+    padding-bottom: 0.375rem;
+    text-align: center;
+}
+
+.copyright .p-small {
+    padding-top: 1.375rem;
+    border-top: 1px solid #c4d8dc;
+    opacity: 0.7;
+}
+
+
+/**********************************/
+/*     18. Back To Top Button     */
+/**********************************/
+a.back-to-top {
+    position: fixed;
+    z-index: 999;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    display: none;
+    width: 2.625rem;
+    height: 2.625rem;
+    border-radius: 1.875rem;
+    background: #00bfd8 url("../images/up-arrow.png") no-repeat center 47%;
+    background-size: 1.125rem 1.125rem;
+    text-indent: -9999px;
+}
+
+a:hover.back-to-top {
+    background-color: #00a7bd;
+}
+
+.blog-body {
+    background: no-repeat;
+}

@@ -1,0 +1,108 @@
+{% extends 'layout/base.html' %}
+
+
+{% block title %}
+Request Map
+{% endblock title %}
+
+
+{% block extra_head %}
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.17/css/bootstrap-select.min.css"
+    integrity="sha256-VMPhaMmJn7coDSbzwqB0jflvb+CDnoAlfStC5RogOQo=" crossorigin="anonymous" />
+
+{% endblock extra_head %}
+
+
+
+{% block content %}
+<div class="container">
+    <div class="card card-nav-tabs">
+        <div class="card-header card-header-warning">
+            Fill The Form to generate card
+        </div>
+        <div class="card-body">
+            <div class="col-md-6 m-auto">
+                <h4 class="card-title">Request For A Map</h4>
+                <form action="." method="POST">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div class="form-group ">
+                        <label class="control-label">{{field.label}}</label>
+                        {{field}}
+
+                    </div>
+
+                    {% endfor %}
+                    <div class="form-group">
+                        <button class="btn btn-outline-primary btn-round" data-toggle="modal"
+                            data-target="#advanced-options">Advanced Options</button>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">SUBMIT</button>
+
+                </form>
+                <p class="card-text">You will be redirected to the dowload Link</p>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL FORM -->
+
+<!-- Modal -->
+<div class="modal fade" id="advanced-options" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Advanced Options</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="advanced-form">
+
+                    {% for field in option_form %}
+                    <div class="form-group ">
+                        <label class="control-label">{{field.label}}</label>
+                        {{field}}
+                    </div>
+                    {% endfor %}
+                    <input type="submit" value="Submit" disabled class="btn btn-primary">
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+{% block extra_java %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.17/js/bootstrap-select.min.js"
+    integrity="sha256-QOE02Glo1C1gHzP96JOaxyIMt4XSFv/exZaYLY4dwO0=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        var $list = $("form :input[type='text'], form :input[type='email']");
+        $list.each(function () {
+            $(this).addClass('form-control')
+        });
+
+        var $list = $("form :input[type='number']");
+        $list.each(function () {
+            $(this).addClass('form-control')
+        });
+        var $textarea = $("form textarea");
+        $textarea.each(function () {
+            $(this).addClass('form-control')
+        })
+    })
+</script>
+
+{% endblock extra_java %}

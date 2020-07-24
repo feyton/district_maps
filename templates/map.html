@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maps</title>
+</head>
+<div class="container">
+    <div class="row">
+
+        {% for s in sp %}
+
+        {% if s.image %}
+        <div class="card">
+            <div class="card-body">
+                <img src="{{s.image.url}}" alt="">
+            </div>
+        </div>
+        {%endif%}
+        {% endfor %}
+
+        <!-- <p>Something gone wrong</p> -->
+    </div>
+</div>
+
+<body>
+
+</body>
+
+</html>

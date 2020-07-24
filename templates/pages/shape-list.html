@@ -1,0 +1,19 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+<div class="container">
+
+    {% for shape in shapes %}
+    <h2>{{shape.title}}</h2>
+
+    {% if shape.image %}
+    <img src="{{shape.image.url}}" alt="" height="200px" class="rounded">
+    {% endif %}
+    <a href="{{shape.get_absolute_url}}">Details</a>
+
+
+    {% endfor %}
+
+</div>
+{% endblock content %}

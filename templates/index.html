@@ -1,158 +1,242 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<title>GIS APPLICATION| Feyton Inc</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="/static/images/icons/favicon.ico" />
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/fonts/iconic/css/material-design-iconic-font.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/css/util.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
-	<!--===============================================================================================-->
-</head>
-
-<body>
+{% extends 'layout/base.html' %}
 
 
-	<div class="bg-g1 size1 flex-w flex-col-c-sb p-l-15 p-r-15 p-t-55 p-b-35 respon1">
-		<span></span>
-		<div class="flex-col-c p-t-50 p-b-50">
-			<h3 class="l1-txt1 txt-center p-b-10">
-				Coming Soon
-			</h3>
-
-			<p class="txt-center l1-txt2 p-b-60">
-				Our website is under construction
-			</p>
-
-			<div class="flex-w flex-c cd100 p-b-82">
-				<div class="flex-col-c-m size2 how-countdown">
-					<span class="l1-txt3 p-b-9 days">35</span>
-					<span class="s1-txt1">Days</span>
-				</div>
-
-				<div class="flex-col-c-m size2 how-countdown">
-					<span class="l1-txt3 p-b-9 hours">17</span>
-					<span class="s1-txt1">Hours</span>
-				</div>
-
-				<div class="flex-col-c-m size2 how-countdown">
-					<span class="l1-txt3 p-b-9 minutes">50</span>
-					<span class="s1-txt1">Minutes</span>
-				</div>
-
-				<div class="flex-col-c-m size2 how-countdown">
-					<span class="l1-txt3 p-b-9 seconds">39</span>
-					<span class="s1-txt1">Seconds</span>
-				</div>
-			</div>
-
-			<button class="flex-c-m s1-txt2 size3 how-btn" data-toggle="modal" data-target="#subscribe">
-				Follow us for update now!
-			</button>
-		</div>
+{% block title %}
+Home
+{% endblock title %}
 
 
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/index.css" class="css">
+<link rel="stylesheet" href="/static/css/swiper.css" class="css">
+{% endblock extra_head %}
 
-	</div>
 
-	<!-- Modal Login -->
-	<div class="modal fade" id="subscribe" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document" data-dismiss="modal">
-			<div class="modal-subscribe where1-parent bg0 bor2 size4 p-t-54 p-b-100 p-l-15 p-r-15">
-				<button class="btn-close-modal how-btn2 fs-26 where1 trans-04">
-					<i class="zmdi zmdi-close"></i>
-				</button>
+{% block content %}
 
-				<div class="wsize1 m-lr-auto">
-					<h3 class="m1-txt1 txt-center p-b-36">
-						<span class="bor1 p-b-6">Subscribe</span>
-					</h3>
+<header id="header" class="header">
+	<div class="header-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6">
+					<div class="text-container">
+						<h1><span class="turquoise">Welcome to</span> Feyton Incorporate</h1>
+						<p class="p-large">We brought to you GIS mapping at ease!!!</p>
+						<a class="btn btn-outline-success" href="{% url 'multiple-maps' %}">DISCOVER</a>
+					</div> <!-- end of text-container -->
+				</div> <!-- end of col -->
+				<div class="col-lg-6 col-md-6">
+					<h2>What you can do!!!</h2>
 
-					<p class="m1-txt2 txt-center p-b-40">
-						Follow us for update now!
-					</p>
+					<!-- Card Slider -->
+					<div class="slider-container">
+						<div class="swiper-container card-slider">
+							<div class="swiper-wrapper">
 
-					<form class="contact100-form validate-form">
-						<div class="wrap-input100 m-b-10 validate-input" data-validate="Name is required">
-							<input class="s1-txt4 placeholder0 input100" type="text" name="name" placeholder="Name">
-							<span class="focus-input100"></span>
-						</div>
+								<!-- Slide -->
+								{% for post in posts %}
+								<div class="swiper-slide">
+									<div class="card card-carousel">
+										{% if post.image %}
+										<img class="card-image image-link" src="{{post.image.url}}" alt="alternative"
+											data-url="">
+										{% else %}
+										<img class="card-image image-link" src="/static/img/post.jpg" alt="alternative"
+											data-url="{{post.get_absolute_url}}">
+										{% endif %}
+										<div class="card-body">
+											<p class="testimonial-text">{{post.summary}}
+											<p class="testimonial-author">{{post.title}}</p>
+										</div>
+									</div>
+								</div> <!-- end of swiper-slide -->
+								{% endfor %}
+								<!-- end of slide -->
 
-						<div class="wrap-input100 m-b-20 validate-input" data-validate="Email is required: ex@abc.xyz">
-							<input class="s1-txt4 placeholder0 input100" type="text" name="email" placeholder="Email">
-							<span class="focus-input100"></span>
-						</div>
 
-						<div class="w-full">
-							<button class="flex-c-m s1-txt2 size5 how-btn1 trans-04">
-								Get Updates
-							</button>
-						</div>
-					</form>
+							</div> <!-- end of swiper-wrapper -->
 
-					<p class="s1-txt5 txt-center wsize2 m-lr-auto p-t-20">
-						And don’t worry, we hate spam too! You can unsubcribe at anytime.
-					</p>
-				</div>
-			</div>
+							<!-- Add Arrows -->
+							<div class="swiper-button-next"></div>
+							<div class="swiper-button-prev"></div>
+							<!-- end of add arrows -->
 
-		</div>
-	</div>
+						</div> <!-- end of swiper-container -->
+					</div> <!-- end of slider-container -->
+					<!-- end of card slider -->
+					<!-- end of image-container -->
+				</div> <!-- end of col -->
+			</div> <!-- end of row -->
+		</div> <!-- end of container -->
+	</div> <!-- end of header-content -->
+</header> <!-- end of header -->
+<!-- end of header -->
+
+<!-- Testimonials -->
+<div class="slider-2">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="image-container">
+					<img class="img-fluid" src="/static/img/men.svg" alt="alternative">
+				</div> <!-- end of image-container -->
+			</div> <!-- end of col -->
+			<div class="col-lg-6">
+				<h2>Testimonials</h2>
+
+				<!-- Card Slider -->
+				<div class="slider-container">
+					<div class="swiper-container card-slider">
+						<div class="swiper-wrapper">
+							{% for testimony in testimonies %}
+
+							<!-- Slide -->
+							<div class="swiper-slide">
+								<div class="card">
+									<img class="card-image" src="{{testimony.avatar.url}}" alt="alternative">
+									<div class="card-body">
+										<p class="testimonial-text">{{testimony.message}}</p>
+										<p class="testimonial-author">{{testimony.author}} - {{testimony.role}}
+										</p>
+									</div>
+								</div>
+							</div> <!-- end of swiper-slide -->
+							<!-- end of slide -->
+							{% endfor %}
 
 
 
-	<!--===============================================================================================-->
-	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="/static/vendor/bootstrap/js/popper.js"></script>
-	<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="/static/vendor/select2/select2.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="/static/vendor/countdowntime/moment.min.js"></script>
-	<script src="/static/vendor/countdowntime/moment-timezone.min.js"></script>
-	<script src="/static/vendor/countdowntime/moment-timezone-with-data.min.js"></script>
-	<script src="/static/vendor/countdowntime/countdowntime.js"></script>
-	<script>
-		$('.cd100').countdown100({
-			// Set Endtime here
-			// Endtime must be > current time
-			endtimeYear: 0,
-			endtimeMonth: 0,
-			endtimeDate: 10,
-			endtimeHours: 18,
-			endtimeMinutes: 0,
-			endtimeSeconds: 0,
-			timeZone: ""
-			// ex:  timeZone: "America/New_York", can be empty
-			// go to " http://momentjs.com/timezone/ " to get timezone
-		});
-	</script>
-	<!--===============================================================================================-->
-	<script src="/static/vendor/tilt/tilt.jquery.min.js"></script>
-	<script>
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
-	<!--===============================================================================================-->
-	<script src="/static/js/main.js"></script>
 
-</body>
+						</div> <!-- end of swiper-wrapper -->
 
-</html>
+						<!-- Add Arrows -->
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
+						<!-- end of add arrows -->
+
+					</div> <!-- end of swiper-container -->
+				</div> <!-- end of slider-container -->
+				<!-- end of card slider -->
+
+			</div> <!-- end of col -->
+		</div> <!-- end of row -->
+	</div> <!-- end of container -->
+</div> <!-- end of slider-2 -->
+<!-- end of testimonials -->
+
+
+<!-- About -->
+<div id="about" class="basic-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>About The Team</h2>
+				<p class="p-heading p-large">Meat our team </p>
+			</div> <!-- end of col -->
+		</div> <!-- end of row -->
+		<div class="row">
+			<div class="col-lg-12">
+
+				<!-- Team Member -->
+				{% for member in members %}
+				<div class="team-member">
+					<div class="image-wrapper">
+						{% if member.avatar %}
+						<img class="img-fluid" src="{{member.avatar.url}}" alt="alternative">
+						{% else %}
+						<img class="img-fluid" src="/static/images/team-member-1.svg" alt="alternative">
+						{% endif %}
+					</div> <!-- end of image-wrapper -->
+					<p class="p-large"><strong>{{member.name}}</strong></p>
+					<p class="job-title capitalize">{{member.role}}</p>
+					<span class="social-icons">
+						<span class="fa-stack">
+							<a href="https://fb.me/feytonf">
+								<i class="fas fa-circle fa-stack-2x facebook"></i>
+								<i class="fab fa-facebook-f fa-stack-1x"></i>
+							</a>
+						</span>
+						<span class="fa-stack">
+							<a href="https://twitter.com/feytonf">
+								<i class="fas fa-circle fa-stack-2x twitter"></i>
+								<i class="fab fa-twitter fa-stack-1x"></i>
+							</a>
+						</span>
+					</span> <!-- end of social-icons -->
+				</div> <!-- end of team-member -->
+				<!-- end of team member -->
+				{% endfor %}
+
+
+			</div> <!-- end of col -->
+		</div> <!-- end of row -->
+	</div> <!-- end of container -->
+</div> <!-- end of basic-4 -->
+<!-- end of about -->
+
+
+<!-- Contact -->
+<div id="contact" class="form-2">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<h2>Contact Information</h2>
+				<ul class="list-unstyled li-space-lg">
+					<li class="address">Don't hesitate to give us a call or send us a contact form message</li>
+					<li><i class="fas fa-map-marker-alt"></i>Kigali, Rwanda</li>
+					<li><i class="fas fa-phone"></i><a class="turquoise" href="tel:+250787241457">(250) 787 241 457</a>
+					</li>
+					<li><i class="fas fa-envelope"></i><a class="turquoise"
+							href="mailto:info@feyton.co.rw">info@feyton.co.rw</a></li>
+				</ul>
+			</div> <!-- end of col -->
+			<div class="col-lg-6">
+
+				<!-- Contact Form -->
+				<form id="contactForm" data-toggle="validator" data-focus="false">
+					<div class="form-group">
+						<label class="label-control" for="cname">Name</label>
+						<input type="text" class="form-control" id="cname" required>
+						<div class="help-block with-errors"></div>
+					</div>
+					<div class="form-group">
+						<label class="label-control" for="cemail">Email</label>
+						<input type="email" class="form-control" id="cemail" required>
+						<div class="help-block with-errors"></div>
+					</div>
+					<div class="form-group">
+						<label class="label-control" for="cmessage">Your message</label>
+						<textarea class="form-control" id="cmessage" required></textarea>
+						<div class="help-block with-errors"></div>
+					</div>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" value="">I have read and
+							agree with stated <a href="">Privacy Policy</a> and <a href="">Terms Conditions</a>
+							<span class="form-check-sign">
+								<span class="check"></span>
+							</span>
+						</label>
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-info">SUBMIT MESSAGE</button>
+					</div>
+					<div class="form-message">
+						<div id="cmsgSubmit" class="h3 text-center hidden"></div>
+					</div>
+				</form>
+				<!-- end of contact form -->
+
+			</div> <!-- end of col -->
+		</div> <!-- end of row -->
+	</div> <!-- end of container -->
+</div> <!-- end of form-2 -->
+<!-- end of contact -->
+
+{% endblock content %}
+
+
+{% block extra_java %}
+<script src="/static/js/swiper.min.js"></script>
+{% endblock extra_java %}
