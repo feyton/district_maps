@@ -1,11 +1,12 @@
 import random
+import os
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
 import numpy as np
 import shapefile as shp
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from django.conf import settings
-import os
 sns.set(style="whitegrid", palette="pastel", color_codes=True)
 sns.mpl.rc("figure", figsize=(10, 6))
 
@@ -160,7 +161,7 @@ def plot_map_fill_multiples_ids(title, comuna, sf, code, comunas,
         plt.ylim(y_lim)
 
     image_path = "maps/%s.png" % code
-    fig.savefig("./media/%s" % image_path)
+    fig.savefig("/home/igityopp/gis.feyton.co.rw/media/%s" % image_path)
     return image_path
 
 
