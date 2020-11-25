@@ -1,0 +1,21 @@
+{% extends 'layout/base.html' %}
+
+
+{% block title %}
+{{shape.title}}
+{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    {% if shape.image %}
+    <h4>{{shape.name}}</h4>
+    <img src="{{shape.image.url}}" alt="shape Image">
+    <a href="{{shape.image.url}}" download="download">Save To PC</a>
+    {% else %}
+
+    <h3>Your search didn't match any result.</h3>
+    <p>To improve your search, make sure that your code has a valid shape associated with it</p>
+    {% endif %}
+</div>
+{% endblock content %}

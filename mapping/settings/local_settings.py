@@ -14,3 +14,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST_USER = 'no-reply@feyton.co.rw'
+
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

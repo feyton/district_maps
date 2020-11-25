@@ -1,19 +1,184 @@
 {% extends 'layout/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block title %}
+Shapes Lists
+{% endblock title %}
 
 
 {% block content %}
 <div class="container">
+    <div class="content">
+        <div class="row">
 
-    {% for shape in shapes %}
-    <h2>{{shape.title}}</h2>
+            {% for shape in shapes %}
+            {% if shape.image %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{shape.title|title}}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">Code: {{shape.code}}</h6>
+                        <img src="{{shape.image.url}}" class="card-image-bottom" alt="">
+                        <a href="{{shape.get_absolute_url}}" class="card-link btn btn-info">View</a>
+                        <a data-url="{% url 'delete-shape-request' pk=shape.slug %}"
+                            class="card-link btn btn-outline-primary pull-right deletion-request"
+                            data-image="{{shape.image.url}}">Request
+                            Deletion</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
 
-    {% if shape.image %}
-    <img src="{{shape.image.url}}" alt="" height="200px" class="rounded">
-    {% endif %}
-    <a href="{{shape.get_absolute_url}}">Details</a>
+            {% endfor %}
+        </div>
+
+        {% if is_paginated %}
+        <nav aria-label="">
+            <ul class="pagination justify-content-center ">
+
+                {% if page_obj.has_previous %}
 
 
-    {% endfor %}
 
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'shape-list' %}?page={{page_obj.previous_page_number}}">
+                        PREVIOUS </a>
+                </li>{% endif %}
+
+                {% blocktrans with num=page_obj.number%}
+                <li class="page-item active">
+                    <span class="page-link">
+                        {{num}}
+                        <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+                {% endblocktrans %}
+
+                {% if page_obj.has_next %}
+
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'shape-list' %}?page={{page_obj.next_page_number}}">Next</a>
+                </li>{% endif %}
+            </ul>
+        </nav>
+
+        {% endif %}
+
+    </div>
 </div>
+
+<div class="modal fade" id="delete-shape" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+
+        <div class="modal-content">
+            <div class="card">
+                <div class="modal-header justify-content-center">
+                    <img class="card-img-top shape-image" src="" alt="shape image" height="300px" width="100px">
+
+                </div>
+                <div class="card-body">
+                    <form action="#form" method="post" id='myform'>
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                        {% if field.field.widget.input_type == 'checkbox' %}
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                {% render_field field class="form-check-input" %}
+
+                                {{field.label}}
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                        </div>
+
+                        {% elif field.field.widget.input_type == 'select' %}
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-4 col-form-label">{{field.label}}:</label>
+                                    <div class="col-sm-8">
+                                        {% render_field field class="custom-select" %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% else %}
+                        <div class="form-group ">
+                            <label class="control-label">{{field.label}}</label>
+                            {{field}}
+
+                        </div>
+                        {%endif%}
+                        {% endfor %}
+
+                        <input type="submit" value="REQUEST" class="btn btn-info btn-round">
+
+                    </form>
+                    <p class="card-text">Request can take long time to be processed. Hangon tight</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
+
+
+{% block extra_java %}
+<script>
+    $(document).ready(function () {
+        var $list = $("form :input[type='text'], form :input[type='email']");
+        $list.each(function () {
+            $(this).addClass('form-control')
+        });
+
+        var $list = $("form :input[type='number']");
+        $list.each(function () {
+            $(this).addClass('form-control')
+        });
+        var $textarea = $("form textarea");
+        $textarea.each(function () {
+            $(this).addClass('form-control')
+        });
+        var $select = $("#advanced-form select");
+        $select.each(function () {
+            $(this).addClass('custom-select w-90')
+        });
+        $(".deletion-request").click(function (e) {
+            e.preventDefault()
+            $link = $(this).data('url');
+            $image = $(this).data('image');
+            $('.shape-image').attr('src', $image)
+            $('#delete-shape').modal('show');
+            $('form').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $link,
+                    method: 'POST',
+                    data: $('form').serialize(),
+                    success: function (data) {
+                        $.notify({
+                            title: 'Deletion request received',
+                            message: data.message
+                        }, {
+                            type: 'success'
+                        }),
+                            document.getElementById('myform').reset();
+                        $('#delete-shape').modal('hide');
+                    },
+                    error: function (error_data) {
+                        console.log(error_data)
+                    }
+                })
+            })
+
+        })
+    })
+</script>
+
+{% endblock extra_java %}

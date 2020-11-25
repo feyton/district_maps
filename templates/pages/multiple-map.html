@@ -1,4 +1,5 @@
 {% extends 'layout/base.html' %}
+{% load widget_tweaks %}
 
 
 {% block title %}
@@ -18,9 +19,7 @@ Request Map
 {% block content %}
 <div class="container">
     <div class="card card-nav-tabs">
-        <div class="card-header card-header-warning">
-            Fill The Form to generate card
-        </div>
+
         <div class="card-body">
             <div class="col-md-6 m-auto">
                 <h4 class="card-title">Request For A Map</h4>
@@ -29,19 +28,69 @@ Request Map
 
                     {% for field in form %}
                     <div class="form-group ">
-                        <label class="control-label">{{field.label}}</label>
+                        <label class="">{{field.label}}</label>
                         {{field}}
 
                     </div>
 
                     {% endfor %}
-                    <div class="form-group">
-                        <button class="btn btn-outline-primary btn-round" data-toggle="modal"
-                            data-target="#advanced-options">Advanced Options</button>
+
+
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-outline-primary btn-round" type="button" data-toggle="collapse"
+                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Advanced options
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse " aria-labelledby="headingOne"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+
+                            {% for field in option_form %}
+                            {% if field.field.widget.input_type == 'checkbox' %}
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    {% render_field field class="form-check-input" %}
+
+                                    {{field.label}}
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+
+                            {% elif field.field.widget.input_type == 'select' %}
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-4 col-form-label">{{field.label}}:</label>
+                                        <div class="col-sm-8">
+                                            {% render_field field class="custom-select" %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="form-group ">
+                                <label class="control-label">{{field.label}}</label>
+                                {{field}}
+
+                            </div>
+                            {%endif%}
+                            {% endfor %}
+
+                        </div>
                     </div>
 
 
-                    <button type="submit" class="btn btn-primary">SUBMIT</button>
+
+
+
+                    <button type="submit" class="btn btn-info ">SUBMIT</button>
 
                 </form>
                 <p class="card-text">You will be redirected to the dowload Link</p>
@@ -54,33 +103,6 @@ Request Map
 
 <!-- MODAL FORM -->
 
-<!-- Modal -->
-<div class="modal fade" id="advanced-options" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Advanced Options</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="" id="advanced-form">
-
-                    {% for field in option_form %}
-                    <div class="form-group ">
-                        <label class="control-label">{{field.label}}</label>
-                        {{field}}
-                    </div>
-                    {% endfor %}
-                    <input type="submit" value="Submit" disabled class="btn btn-primary">
-                </form>
-
-            </div>
-
-        </div>
-    </div>
-</div>
 {% endblock content %}
 
 
@@ -101,7 +123,12 @@ Request Map
         var $textarea = $("form textarea");
         $textarea.each(function () {
             $(this).addClass('form-control')
+        });
+        var $select = $("#advanced-form select");
+        $select.each(function () {
+            $(this).addClass('custom-select w-90')
         })
+
     })
 </script>
 

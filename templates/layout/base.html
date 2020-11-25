@@ -44,9 +44,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
-                    <form class="form-inline m-auto" action="" method="get">
+                    <form class="form-inline m-auto" action="{% url 'search-shape' %}" method="get">
                         <div class="form-group no-border">
-                            <input type="text" class="form-control" placeholder="Search code">
+                            <input type="text" class="form-control" placeholder="Search code" name="q" value={{query}}>
                         </div>
                         <button type="submit" class="btn btn-neutral btn-icon btn-round">
                             <i class="fa fa-search"></i>
@@ -62,6 +62,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'multiple-maps' %}">Multiple-Maps</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{% url 'shape-list' %}" class="nav-link">List of Shapes</a>
+                        </li>
+
+                        {% if user.is_superuser %}
+
+                        <li class="nav-item">
+                            <a href="{% url 'delete-request-list' %}" class="nav-link">Delete Shapes</a>
+                        </li>{% endif %}
                     </ul>
                 </div>
             </div>

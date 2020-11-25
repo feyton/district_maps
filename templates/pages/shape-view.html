@@ -8,13 +8,37 @@
 
 {% block content %}
 <div class="container">
-    {% if shape.image %}
-    <h4>{{shape.name}}</h4>
-    <img src="{{shape.image.url}}" alt="shape Image">
-    <a href="{{shape.image.url}}" download="download">Save To PC</a>
-    {% else %}
 
-    <h3>Something went wrong</h3>
-    {% endif %}
+    <div class="row">
+        {% if shape.image %}
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+
+                <h4 class="card-title text-center bold">{{shape.name|title}}</h4>
+                <img class="" src="{{shape.image.url}}" alt="{{shape.name}}-image">
+
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Shape Details</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Code: <span
+                            class="text-info font-weight-bold">{{shape.code}}</span></h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+
+                    <a href="{{shape.image.url}}" class="card-link btn btn-success"
+                        download="{{shape.download_name}}">DOWNLOAD</a>
+                    <a href="#email" class="card-link btn btn-outline-success send-shape">SAVE LINK TO EMAIL</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <h3>Something went wrong</h3>
+        {% endif %}
+
+    </div>
+</div>
 </div>
 {% endblock content %}

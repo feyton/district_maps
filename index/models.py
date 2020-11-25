@@ -1,7 +1,8 @@
-from django.urls import reverse
+from django.core.mail import send_mail
 from django.db import models
+from django.urls import reverse
+from django.conf import settings
 from .utils import code_gen, photo_path
-from django.db.models.signals import post_delete, post_save
 
 
 class District(models.Model):
@@ -35,6 +36,8 @@ class ShapeImage(models.Model):
     summary = models.TextField(blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True, primary_key=False)
     image = models.ImageField(blank=True, null=True)
+    download_name = models.CharField(max_length=20, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse('shape-image', kwargs={'slug': self.slug})
@@ -44,11 +47,19 @@ class ShapeImage(models.Model):
             self.code = code_gen()
         if not self.slug:
             self.slug = "%s-%s" % (self.name.replace(" ", ''), self.code)
-
+        if not self.download_name:
+            name = '%s-%s' % (self.code, self.name)
+            self.download_name = name
         super().save(*args, **kwargs)
 
     def __str__(self):
         return "%s - %s" % (self.code, self.name)
+
+    def set_name(self):
+        if not self.download_name:
+            name = '%s-%s' % (self.code, self.name)
+            self.download_name = name
+            self.save()
 
 
 class Testimony(models.Model):
@@ -78,3 +89,35 @@ class Example(models.Model):
     title = models.CharField(max_length=255)
     image = models.ImageField(blank=True, null=True)
     summary = models.TextField()
+
+
+class ShapeDeleteRequest(models.Model):
+    user = models.EmailField(blank=False, null=False, verbose_name='email')
+    shape = models.ForeignKey(ShapeImage, null=False,
+                              blank=False, on_delete=models.CASCADE)
+    reason = models.TextField(blank=False, null=False,
+                              verbose_name='reason for request')
+    date = models.DateTimeField(auto_now_add=True)
+    notify = models.BooleanField(default=False, verbose_name='notify me')
+
+    def notity_me(self, code):
+        if self.notify:
+            send_mail('Shape deletion request',
+                      'Dear user, The request deletion of a shape with code : %s has been approved' % code,
+                      settings.DEFAULT_FROM_EMAIL,
+                      [self.email, ],
+                      fail_silently=True,)
+
+    def approve(self):
+        shape = self.shape
+        code = shape.code
+        self.notify_me(code)
+        shape.delete()
+
+    def __str__(self):
+        return '%s-<%s>' % (self.shape.code, self.user)
+
+
+class Subscriber(models.Model):
+    email = models.EmailField(blank=False, null=False)
+    notify = models.BooleanField(default=True)

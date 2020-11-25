@@ -1,12 +1,16 @@
-import random
 import os
-os.environ['OPENBLAS_NUM_THREADS'] = '1'
-import numpy as np
-import shapefile as shp
-import pandas as pd
+import random
+
+import matplotlib
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import seaborn as sns
+import shapefile as shp
 from django.conf import settings
+
+matplotlib.use('Agg')  # watch this line
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
 sns.set(style="whitegrid", palette="pastel", color_codes=True)
 sns.mpl.rc("figure", figsize=(10, 6))
 
@@ -31,8 +35,8 @@ def read_shapefile(sf):
 def plot_shape(id, s=None):
     """ PLOTS A SINGLE SHAPE """
     plt.figure()
-    ax = plt.axes()
-    ax.set_aspect('equal')
+    # ax = plt.axes()
+    # ax.set_aspect('equal')
     shape_ex = sf.shape(id)
     x_lon = np.zeros((len(shape_ex.points), 1))
     y_lat = np.zeros((len(shape_ex.points), 1))
@@ -129,20 +133,21 @@ def plot_map_fill_multiples_ids(title, comuna, sf, code, comunas,
                                 x_lim=None,
                                 y_lim=None,
                                 figsize=(11, 9),
-                                color='r'):
+                                color='c', show_title=True, add_name=True):
     '''
     Plot map with lim coordinates
     '''
 
     plt.figure(figsize=figsize)
     fig, ax = plt.subplots(figsize=figsize)
-    fig.suptitle(title, fontsize=16)
+    if show_title:
+        fig.suptitle(title, fontsize=16)
     ax.grid(False)
     for shape in sf.shapeRecords():
         x = [i[0] for i in shape.shape.points[:]]
         y = [i[1] for i in shape.shape.points[:]]
         ax.plot(x, y, 'k')
-
+    com_id = 0
     for id in comuna:
         shape_ex = sf.shape(id)
         x_lon = np.zeros((len(shape_ex.points), 1))
@@ -151,17 +156,19 @@ def plot_map_fill_multiples_ids(title, comuna, sf, code, comunas,
             x_lon[ip] = shape_ex.points[ip][0]
             y_lat[ip] = shape_ex.points[ip][1]
         ax.fill(x_lon, y_lat, color)
-
-        x0 = np.mean(x_lon)
-        y0 = np.mean(y_lat)
-        plt.text(x0, y0, id, fontsize=10)
+        if add_name is not False:
+            x0 = np.mean(x_lon)
+            y0 = np.mean(y_lat)
+            plt.text(x0, y0, comunas[com_id], fontsize=10)
+            com_id += 1
 
     if (x_lim is not None) & (y_lim is not None):
         plt.xlim(x_lim)
         plt.ylim(y_lim)
 
     image_path = "maps/%s.png" % code
-    fig.savefig("/home/igityopp/gis.feyton.co.rw/media/%s" % image_path)
+    fig.savefig("%s/%s" % (settings.MEDIA_ROOT, image_path))
+    plt.close()
     return image_path
 
 
@@ -170,7 +177,7 @@ def plot_map_fill_multiples_ids(title, comuna, sf, code, comunas,
 #                             comuna_id, sf, color='g')
 
 
-def plot_comunas_2(sf, title, comunas, color, code):
+def plot_comunas_2(sf, title, comunas, color, code, show_title, add_name=True):
     '''
     Plot map with selected comunes, using specific color
     '''
@@ -182,7 +189,7 @@ def plot_comunas_2(sf, title, comunas, color, code):
         comuna_id.append(d_id)
 #     print(comuna_id)
     return plot_map_fill_multiples_ids(
-        title, comuna_id, sf, code, comunas, x_lim=None, y_lim=None, figsize=(11, 9), color=color)
+        title, comuna_id, sf, code, comunas, x_lim=None, y_lim=None, figsize=(11, 9), color=color, show_title=show_title, add_name=add_name)
 
 
 # districts = ['Musanze', 'Gicumbi', 'Burera']

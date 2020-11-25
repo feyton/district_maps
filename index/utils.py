@@ -1,12 +1,14 @@
 import random
 from datetime import datetime
 from maps.main import sf, plot_comunas_2
-import string
 import os
 
 
 def code_gen():
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
+    chars = "ABCDEFGHJKLMNOPQRSTYXW"
+    randomstr = ''.join((random.choice(chars)) for x in range(5))
+    date = datetime.now().date()
+    return '%s-%s' % (date, randomstr)
 
 
 def photo_path(instance, filename):
@@ -22,12 +24,12 @@ def photo_path(instance, filename):
                                                                          path=directory)
 
 
-def generate_image_for_shape(shape):
+def generate_image_for_shape(shape, color='b', show_title=True, add_name=True):
     districts = []
     for d in shape.districts.all():
         districts.append(d.name)
-
-    img = plot_comunas_2(sf, shape.title, districts, 'g', shape.code)
+    img = plot_comunas_2(sf, shape.title, districts, color,
+                         shape.code, show_title, add_name)
     shape.image = img
     shape.save()
     return shape
