@@ -1,5 +1,7 @@
 import os
 import random
+import os
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
 
 import matplotlib
 import matplotlib.pyplot as plt
