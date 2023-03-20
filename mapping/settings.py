@@ -1,0 +1,171 @@
+import os
+from decouple import config
+import cloudinary
+import cloudinary.api
+import cloudinary.uploader
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = "obpx62&+km6-+g6_n^iw55e9to2dk69p-y#b+!+5eecpc5"
+CLOUDINARY_URL = config("CLOUDINARY_URL")
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config("DEBUG", default=False)
+ALLOWED_HOSTS = ['*']
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'index',
+    'maps',
+    'widget_tweaks',
+    'rest_framework',
+    'user',
+    'cloudinary',
+    # AllAuth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+ROOT_URLCONF = 'mapping.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'mapping.wsgi.application'
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+RUN_MODE = config("MODE", default="development")
+
+STATIC_URL = '/static/'
+STATIC_ROOT = '/home/igityopp/gis.feyton.co.rw/static'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+MAP_DIR = BASE_DIR / 'maps'
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+if RUN_MODE == "production":
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    DEBUG = False
+    APPEND_SLASH = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEBUG = True
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = config("EMAIL_USER", default="")
+EMAIL_HOST_PASSWORD = config('EMAIL_PASS', default="")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# REGISTRATION-LOGIN URLS
+LOGIN_URL = 'account_login'
+LOGOUT_URL = 'account_logout'
+LOGIN_REDIRECT_URL = 'index'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+cloudinary.config(cloud_name=config("cloud_name"), api_key=config(
+    "api_key"), api_secret=config("api_secret"), secure=True)
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+SITE_ID = 1
+AUTH_USER_MODEL = 'user.User'
+# All Auth SETTINGS
+SIGNUP_FORM_CLASS = 'user.forms.CreateUserForm'
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+SOCIALACCOUNT_AUTO_SIGNUP = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SIGNUP_FORM_CLASS = SIGNUP_FORM_CLASS
+ACCOUNT_LOGIN_ON_EMAIL_COMFIRMATION = True
+ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = True
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Certified Builders |'
+
+
+def ACCOUNT_USER_DISPLAY(user):
+    return user.get_full_name()
