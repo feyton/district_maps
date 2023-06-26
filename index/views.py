@@ -1,16 +1,12 @@
-from django.conf import settings
 from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, View
-from seaborn.palettes import color_palette
 from django.http import JsonResponse
-from maps.main import plot_comunas_data, plot_map_fill_multiples_ids_tone, sf
 
 from .forms import DeleteShapeForm, OptionForm, ShapeImageForm
-from .models import District, Example, Member, ShapeImage, Species, Testimony, Subscriber, ShapeDeleteRequest
+from .models import District, Example, Member, ShapeImage, Species, Testimony, ShapeDeleteRequest
 from .utils import generate_image_for_shape
-from rest_framework.views import APIView
 
 class HomeView(View):
     def get(self, *args, **kwargs):
@@ -113,27 +109,23 @@ class ShapeListView(ListView):
 
 
 def shape_view(request, slug):
-    img = get_object_or_404(ShapeImage, slug=slug)
-    if img:
-        context = {'shape': img}
+    if ShapeImage.objects.filter(slug=slug).exists():
+        context = {'shape': ShapeImage.objects.get(slug=slug)}
         return render(request, 'pages/shape-view.html', context)
 
 
 def search_shape(request):
-    query_set = ShapeImage.objects.all()
     query = request.GET.get('q')
     if query:
-        queryset = query_set.filter(
-            Q(code__iexact=query)).distinct()
+        queryset = ShapeImage.objects.filter(Q(code__icontains=query))
+        context = {
+            'shape': queryset,
+            'query': query,
+        }
+        return render(request, 'pages/search.html', context)
     else:
         messages.error(request, "Type a valid term")
         return redirect('home')
-    context = {
-        'shape': queryset,
-        'query': query,
-    }
-
-    return render(request, 'pages/search.html', context)
 
 
 def delete_shape_request(request, pk):

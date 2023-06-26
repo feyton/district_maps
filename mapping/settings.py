@@ -92,9 +92,9 @@ USE_TZ = True
 RUN_MODE = config("MODE", default="development")
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/igityopp/gis.feyton.co.rw/static'
+STATIC_ROOT = BASE_DIR / 'assets'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
+MEDIA_ROOT = BASE_DIR / 'media'
 
 MAP_DIR = BASE_DIR / 'maps'
 REST_FRAMEWORK = {

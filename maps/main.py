@@ -1,8 +1,5 @@
 import os
 import random
-import os
-os.environ['OPENBLAS_NUM_THREADS'] = '1'
-
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
@@ -12,7 +9,6 @@ import shapefile as shp
 from django.conf import settings
 
 matplotlib.use('Agg')  # watch this line
-os.environ['OPENBLAS_NUM_THREADS'] = '1'
 sns.set(style="whitegrid", palette="pastel", color_codes=True)
 sns.mpl.rc("figure", figsize=(10, 6))
 
@@ -37,8 +33,6 @@ def read_shapefile(sf):
 def plot_shape(id, s=None):
     """ PLOTS A SINGLE SHAPE """
     plt.figure()
-    # ax = plt.axes()
-    # ax.set_aspect('equal')
     shape_ex = sf.shape(id)
     x_lon = np.zeros((len(shape_ex.points), 1))
     y_lat = np.zeros((len(shape_ex.points), 1))
@@ -49,7 +43,6 @@ def plot_shape(id, s=None):
     x0 = np.mean(x_lon)
     y0 = np.mean(y_lat)
     plt.text(x0, y0, s, fontsize=15)
-    # use bbox (bounding box) to set plot limits
     plt.xlim(shape_ex.bbox[0], shape_ex.bbox[2])
     return x0, y0
 
@@ -128,17 +121,11 @@ def plot_map_fill(id, sf, x_lim=None,
         plt.ylim(y_lim)
 
 
-# plot_map_fill(0, sf, color='g')
-
-
 def plot_map_fill_multiples_ids(title, comuna, sf, code, comunas,
                                 x_lim=None,
                                 y_lim=None,
                                 figsize=(11, 9),
                                 color='c', show_title=True, add_name=True):
-    '''
-    Plot map with lim coordinates
-    '''
 
     plt.figure(figsize=figsize)
     fig, ax = plt.subplots(figsize=figsize)
@@ -174,10 +161,6 @@ def plot_map_fill_multiples_ids(title, comuna, sf, code, comunas,
     return image_path
 
 
-# comuna_id = [0, 1, 2, 3, 4, 5, 6, 20, 25]
-# plot_map_fill_multiples_ids("Multiple Shapes",
-#                             comuna_id, sf, color='g')
-
 
 def plot_comunas_2(sf, title, comunas, color, code, show_title, add_name=True):
     '''
@@ -192,10 +175,6 @@ def plot_comunas_2(sf, title, comunas, color, code, show_title, add_name=True):
 #     print(comuna_id)
     return plot_map_fill_multiples_ids(
         title, comuna_id, sf, code, comunas, x_lim=None, y_lim=None, figsize=(11, 9), color=color, show_title=show_title, add_name=add_name)
-
-
-# districts = ['Musanze', 'Gicumbi', 'Burera']
-# plot_comunas_2(sf, 'Favorable districts for Acacia', districts, 'c')
 
 
 def calc_color(data, color=None):
@@ -260,12 +239,8 @@ def plot_map_fill_multiples_ids_tone(sf, title, comuna,
     if (x_lim is not None) & (y_lim is not None):
         plt.xlim(x_lim)
         plt.ylim(y_lim)
-    # name = random.randint(1450, 29849)
-    # fig.savefig("./media/maps/%s.png" % name)
-    # # print(img.path)
-    # sp = Species()
-    # sp.image = 'maps/%s.png' % name
-    # sp.save()
+    name = random.randint(1450, 29849)
+    fig.savefig("./media/maps/%s.png" % name)
 
 
 def plot_comunas_data(sf, title, comunas, data=None,
@@ -290,8 +265,3 @@ def plot_comunas_data(sf, title, comunas, data=None,
                                      figsize=(11, 9))
 
 
-# south = ['Rulindo', 'Burera', 'Gasabo', 'Nyagatare', 'Bugesera']
-# data = [100, 2000, 300, 400000, 500]
-# print_id = True  # The shape id will be printed
-# color_pallete = 1  # 'Purples'
-# plot_comunas_data(sf, 'South', south, data, color_pallete, print_id)
